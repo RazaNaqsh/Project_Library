@@ -1,0 +1,72 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+.mainContainer {
+	width: max(60rem, 90%);
+	height: 100vh;
+	background-color: antiquewhite;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.mainHeader {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 2rem;
+}
+.formContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2rem;
+	padding: 2rem;
+	border-bottom: 2px solid;
+}
+.formSection {
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+}
+
+input {
+	padding: 1rem;
+	border-radius: 1rem;
+	font-size: 1rem;
+	letter-spacing: 1px;
+}
+
+label {
+	font-size: 1.2rem;
+}
+.addBook {
+	justify-self: center;
+	padding: 0.8rem 1rem;
+	border-radius: 1rem;
+}
+.showCase {
+	margin-top: 2rem;
+	display: flex;
+	justify-content: center;
+	width: 70%;
+}
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+th,
+td,
+tr {
+	border: 1px solid;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: center;
+	font-size: 1.2rem;
+}
+
+td {
+	width: 30%;
+}
