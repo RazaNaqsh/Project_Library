@@ -1,5 +1,3 @@
-let authorName = document.getElementById("authorName").value;
-let bookPages = document.getElementById("bookPages").value;
 // const bookStatus = document.getElementById("bookStatus");
 const addBtn = document.getElementById("submit");
 const list = document.getElementById("bookList");
@@ -29,6 +27,32 @@ const Library = [
 	},
 ];
 
+function Book(name, author, pages) {
+	this.title = name;
+	this.author = author;
+	this.pages = pages;
+}
+
+function addToList(book, index) {
+	const row = document.createElement("tr");
+	row.innerHTML = `<td data-index =${index}>${book.title}</td>
+	<td data-index =${index}>${book.author}</td>
+	<td data-index =${index}>${book.pages}</td>
+	<td data-index =${index}><a href="#" data-index =${index} class="cancel">X</a></td>`;
+	list.appendChild(row);
+}
+
+function RemoveBook() {
+	const cancelBtnNode = document.querySelectorAll(".cancel");
+	const cancelBtnArray = Array.from(cancelBtnNode);
+	cancelBtnArray.forEach((cancelBtn) => {
+		cancelBtn.addEventListener("click", (e) => {
+			const elToRemove = e.target.parentElement.parentElement;
+			elToRemove.remove();
+		});
+	});
+}
+
 addBtn.addEventListener("click", (e) => {
 	e.preventDefault();
 	const bookTitle = document.getElementById("bookName").value;
@@ -36,24 +60,13 @@ addBtn.addEventListener("click", (e) => {
 	const bookPages = document.getElementById("bookPages").value;
 	const book = new Book(bookTitle, authorName, bookPages);
 	Library.push(book);
-	addToList(book);
+	const indexBook = Library.indexOf(book);
+	addToList(book, indexBook);
+	RemoveBook();
 });
 
 Library.forEach((book) => {
-	addToList(book);
+	addToList(book, Library.indexOf(book));
 });
 
-function addToList(book) {
-	const row = document.createElement("tr");
-	row.innerHTML = `<td>${book.title}</td>
-	<td>${book.author}</td>
-	<td>${book.pages}</td>
-	<td><a href="#" class="cancel">X</a></td>`;
-	list.appendChild(row);
-}
-//constructor
-function Book(name, author, pages) {
-	this.title = name;
-	this.author = author;
-	this.pages = pages;
-}
+RemoveBook();
