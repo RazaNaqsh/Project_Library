@@ -63,6 +63,9 @@ addBtn.addEventListener("click", (e) => {
 	const indexBook = Library.indexOf(book);
 	addToList(book, indexBook);
 	RemoveBook();
+	document.getElementById("bookName").value = "";
+	document.getElementById("authorName").value = "";
+	document.getElementById("bookPages").value = undefined;
 });
 
 Library.forEach((book) => {
