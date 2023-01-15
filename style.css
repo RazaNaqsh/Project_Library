@@ -58,8 +58,7 @@ table {
 	width: 100%;
 }
 th,
-td,
-tr {
+td {
 	border: 1px solid;
 	padding-top: 12px;
 	padding-bottom: 12px;
@@ -67,6 +66,7 @@ tr {
 	font-size: 1.2rem;
 }
 
-td {
+td,
+th {
 	width: 30%;
 }
