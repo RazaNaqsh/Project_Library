@@ -18,23 +18,23 @@
         <form action="" class="formContainer">
             <div class="formSection">
                 <div class="form">
-                    <label for="name">Name of Book</label>
-                    <input type="text" placeholder="Enter name of Book" id="name">
+                    <label for="bookName">Name of Book</label>
+                    <input type="text" placeholder="Enter name of Book" value="" id="bookName" required maxlength="30">
                 </div>
                 <div class="form">
-                    <label for="author">Name of Author</label>
-                    <input type="text" placeholder="Enter Author" id="author">
+                    <label for="authorName">Name of Author</label>
+                    <input type="text" placeholder="Enter Author" value="" id="authorName" required maxlength="30">
                 </div>
                 <div class="form">
-                    <label for="pages">Pages</label>
-                    <input type="number" name="" id="pages" placeholder="No of Pages">
+                    <label for="bookPages">Pages</label>
+                    <input type="number" name="" value="" id="bookPages" placeholder="No of Pages" required>
                 </div>
                 <div class="form">
-                    <label for="status">Read?</label>
-                    <input type="checkbox" name="" id="status">
+                    <label for="bookStatus">Read?</label>
+                    <input type="checkbox" name="status" value="status" id="bookStatus" checked>
                 </div>
             </div>
-            <input type="submit" value="Add Book" class="addBook">
+            <input type="submit" value="Add Book" id="submit" class="addBook">
         </form>
 
         <div class="showCase">

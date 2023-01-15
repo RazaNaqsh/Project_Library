@@ -1,12 +1,27 @@
+:root {
+	--gradient: linear-gradient(
+			45deg,
+			aqua,
+			rgb(122, 235, 122),
+			rgb(221, 45, 45),
+			rgb(241, 241, 95),
+			rgb(80, 164, 248)
+		)
+		1;
+	--color-primary: #ab79d6;
+}
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
+body {
+	color: var(--color-primary);
+}
 .mainContainer {
 	width: max(60rem, 90%);
 	height: 100vh;
-	background-color: antiquewhite;
+	background-color: #27272c;
 	margin: auto;
 	display: flex;
 	flex-direction: column;
@@ -24,7 +39,8 @@
 	align-items: center;
 	gap: 2rem;
 	padding: 2rem;
-	border-bottom: 2px solid;
+	border-bottom: 5px solid;
+	border-image: var(--gradient);
 }
 .formSection {
 	display: flex;
