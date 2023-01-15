@@ -81,7 +81,8 @@ table {
 	width: 100%;
 }
 th,
-td {
+td,
+tr {
 	border: 1px solid;
 	padding-top: 12px;
 	padding-bottom: 12px;
@@ -92,4 +93,15 @@ td {
 td,
 th {
 	width: 30%;
+}
+td {
+	color: #99f6e4;
+}
+.cancel {
+	text-decoration: none;
+	color: white;
+	padding: 0.5rem;
+	/* border-radius: 50%; */
+	background-color: red;
+	margin-left: 1rem;
 }
