@@ -26,10 +26,11 @@ const Library = [
 	},
 ];
 
-function Book(name, author, pages) {
+function Book(name, author, pages, status) {
 	this.title = name;
 	this.author = author;
 	this.pages = pages;
+	this.status = status;
 }
 
 function addToList(book, index, status) {
@@ -60,15 +61,20 @@ addBtn.addEventListener("click", (e) => {
 	const authorName = document.getElementById("authorName").value;
 	const bookPages = document.getElementById("bookPages").value;
 	const status = document.getElementById("bookStatus");
-	const book = new Book(bookTitle, authorName, bookPages);
+	let readStatus;
+	if (status.checked === true) readStatus = "Read";
+	else readStatus = "notRead";
+	const book = new Book(bookTitle, authorName, bookPages, readStatus);
 
 	Library.push(book);
 	const indexBook = Library.indexOf(book);
 	addToList(book, indexBook, status.checked);
+	console.log(Library);
 	RemoveBook();
+	checkReadStatus();
 	document.getElementById("bookName").value = "";
 	document.getElementById("authorName").value = "";
-	document.getElementById("bookPages").value = 0;
+	document.getElementById("bookPages").value = undefined;
 });
 
 Library.forEach((book) => {
@@ -76,15 +82,19 @@ Library.forEach((book) => {
 });
 
 RemoveBook();
-const bookStatus = Array.from(document.querySelectorAll(".readStatus"));
-bookStatus.forEach((bookstat) => {
-	bookstat.addEventListener("click", (e) => {
-		const readIndex = e.target.parentElement.getAttribute("data-index");
-		if (bookstat.checked === true) {
-			Library[readIndex].status = "Read";
-		} else {
-			Library[readIndex].status = "notRead";
-		}
-		console.log(Library);
+
+function checkReadStatus() {
+	const bookStatus = Array.from(document.querySelectorAll(".readStatus"));
+	bookStatus.forEach((bookstat) => {
+		bookstat.addEventListener("click", (e) => {
+			const readIndex = e.target.parentElement.getAttribute("data-index");
+			if (bookstat.checked === true) {
+				Library[readIndex].status = "Read";
+			} else {
+				Library[readIndex].status = "notRead";
+			}
+			console.log(Library);
+		});
 	});
-});
+}
+checkReadStatus();
