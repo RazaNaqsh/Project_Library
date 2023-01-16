@@ -43,8 +43,7 @@ function addToList(book, index) {
 }
 
 function RemoveBook() {
-	const cancelBtnNode = document.querySelectorAll(".cancel");
-	const cancelBtnArray = Array.from(cancelBtnNode);
+	const cancelBtnArray = Array.from(document.querySelectorAll(".cancel"));
 	cancelBtnArray.forEach((cancelBtn) => {
 		cancelBtn.addEventListener("click", (e) => {
 			const elToRemove = e.target.parentElement.parentElement;

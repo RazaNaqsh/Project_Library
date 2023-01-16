@@ -59,6 +59,11 @@ input {
 	font-size: 1rem;
 	letter-spacing: 1px;
 }
+input:focus:not(input[type="submit"]) {
+	transform: scale(0.95);
+	transition: 200ms ease-out;
+	outline: solid #67e8f9 3px;
+}
 
 label {
 	font-size: 1.2rem;
@@ -69,6 +74,10 @@ label {
 	background: none;
 	color: var(--color-primary);
 	border-image: var(--gradient);
+}
+.addBook:hover {
+	transform: scale(0.95);
+	transition: 300ms ease-out;
 }
 .showCase {
 	margin-top: 2rem;
@@ -88,6 +97,7 @@ tr {
 	padding-bottom: 12px;
 	text-align: center;
 	font-size: 1.2rem;
+	transition: 200ms ease-out;
 }
 
 td,
@@ -108,4 +118,8 @@ td {
 	border-radius: 0.5rem;
 	background-color: red;
 	margin: auto;
+}
+.cancel:hover {
+	background-color: #b91c1c;
+	transition: background-color 200ms ease-out;
 }
