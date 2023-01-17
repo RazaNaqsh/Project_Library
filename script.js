@@ -49,32 +49,43 @@ function RemoveBook() {
 	const cancelBtnArray = Array.from(document.querySelectorAll(".cancel"));
 	cancelBtnArray.forEach((cancelBtn) => {
 		cancelBtn.addEventListener("click", (e) => {
+			const indexToRemove = e.target.getAttribute("data-index");
+			console.log(indexToRemove);
 			const elToRemove = e.target.parentElement.parentElement;
-			elToRemove.remove();
+			console.log(elToRemove);
+			// elToRemove.remove();
+			// Library.splice(indexToRemove, 1);
+			console.log(Library);
 		});
 	});
 }
 
 addBtn.addEventListener("click", (e) => {
-	e.preventDefault();
+	// e.preventDefault();
+
 	const bookTitle = document.getElementById("bookName").value;
 	const authorName = document.getElementById("authorName").value;
 	const bookPages = document.getElementById("bookPages").value;
 	const status = document.getElementById("bookStatus");
+
 	let readStatus;
 	if (status.checked === true) readStatus = "Read";
 	else readStatus = "notRead";
-	const book = new Book(bookTitle, authorName, bookPages, readStatus);
+	if (bookTitle !== "" && authorName !== "" && bookPages !== "") {
+		const book = new Book(bookTitle, authorName, bookPages, readStatus);
+		Library.push(book);
+		const indexBook = Library.indexOf(book);
+		addToList(book, indexBook, status.checked);
 
-	Library.push(book);
-	const indexBook = Library.indexOf(book);
-	addToList(book, indexBook, status.checked);
-	console.log(Library);
-	RemoveBook();
-	checkReadStatus();
-	document.getElementById("bookName").value = "";
-	document.getElementById("authorName").value = "";
-	document.getElementById("bookPages").value = undefined;
+		console.log(Library);
+		RemoveBook();
+
+		checkReadStatus();
+
+		document.getElementById("bookName").value = "";
+		document.getElementById("authorName").value = "";
+		document.getElementById("bookPages").value = undefined;
+	}
 });
 
 Library.forEach((book) => {
@@ -93,7 +104,7 @@ function checkReadStatus() {
 			} else {
 				Library[readIndex].status = "notRead";
 			}
-			console.log(Library);
+			// console.log(Library);
 		});
 	});
 }
