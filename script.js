@@ -44,24 +44,30 @@ function addToList(book, index, status) {
 	<td data-index =${index}><a href="#" data-index =${index} class="cancel">X</a></td>`;
 	list.appendChild(row);
 }
-
+function eventForRemove(e) {
+	const indexToRemove = e.target.getAttribute("data-index");
+	console.log(indexToRemove);
+	const elToRemove = e.target.parentElement.parentElement;
+	console.log(elToRemove);
+	elToRemove.remove();
+	Library.splice(indexToRemove, 1);
+	console.log(Library);
+}
 function RemoveBook() {
 	const cancelBtnArray = Array.from(document.querySelectorAll(".cancel"));
 	cancelBtnArray.forEach((cancelBtn) => {
-		cancelBtn.addEventListener("click", (e) => {
-			const indexToRemove = e.target.getAttribute("data-index");
-			console.log(indexToRemove);
-			const elToRemove = e.target.parentElement.parentElement;
-			console.log(elToRemove);
-			// elToRemove.remove();
-			// Library.splice(indexToRemove, 1);
-			console.log(Library);
-		});
+		cancelBtn.addEventListener("click", eventForRemove);
+	});
+}
+function removeEvent() {
+	const cancelBtnArray = Array.from(document.querySelectorAll(".cancel"));
+	cancelBtnArray.forEach((cancelBtn) => {
+		cancelBtn.removeEventListener("click", eventForRemove);
 	});
 }
 
 addBtn.addEventListener("click", (e) => {
-	// e.preventDefault();
+	e.preventDefault();
 
 	const bookTitle = document.getElementById("bookName").value;
 	const authorName = document.getElementById("authorName").value;
@@ -78,6 +84,7 @@ addBtn.addEventListener("click", (e) => {
 		addToList(book, indexBook, status.checked);
 
 		console.log(Library);
+		removeEvent();
 		RemoveBook();
 
 		checkReadStatus();
