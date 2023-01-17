@@ -52,9 +52,9 @@ function eventForRemove(e) {
 	// console.log(elToRemove);
 	elToRemove.remove();
 	Library.splice(indexToRemove, 1);
-	// console.log(Library);
+	console.log(Library);
 }
-function RemoveBook() {
+function addEvent() {
 	const cancelBtnArray = Array.from(document.querySelectorAll(".cancel"));
 	cancelBtnArray.forEach((cancelBtn) => {
 		cancelBtn.addEventListener("click", eventForRemove);
@@ -107,6 +107,7 @@ addBtn.addEventListener("click", (e) => {
 	let readStatus;
 	if (status.checked === true) readStatus = "Read";
 	else readStatus = "notRead";
+
 	if (bookTitle !== "" && authorName !== "" && bookPages !== "") {
 		const book = new Book(bookTitle, authorName, bookPages, readStatus);
 		Library.push(book);
@@ -118,7 +119,7 @@ addBtn.addEventListener("click", (e) => {
 
 		console.log(Library);
 		removeEvent();
-		RemoveBook();
+		addEvent();
 
 		checkReadStatus();
 
@@ -132,6 +133,6 @@ Library.forEach((book) => {
 	addToList(book, Library.indexOf(book), book.status === "Read");
 });
 
-RemoveBook();
+addEvent();
 
 checkReadStatus();
