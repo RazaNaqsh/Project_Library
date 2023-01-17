@@ -37,6 +37,7 @@ function addToList(book, index, status) {
 	const row = document.createElement("tr");
 	let tick;
 	if (status === true) tick = "checked";
+	row.classList.add("book");
 	row.innerHTML = `<td data-index =${index}>${book.title}</td>
 	<td data-index =${index}>${book.author}</td>
 	<td data-index =${index}>${book.pages}</td>
@@ -46,12 +47,12 @@ function addToList(book, index, status) {
 }
 function eventForRemove(e) {
 	const indexToRemove = e.target.getAttribute("data-index");
-	console.log(indexToRemove);
+	// console.log(indexToRemove);
 	const elToRemove = e.target.parentElement.parentElement;
-	console.log(elToRemove);
+	// console.log(elToRemove);
 	elToRemove.remove();
 	Library.splice(indexToRemove, 1);
-	console.log(Library);
+	// console.log(Library);
 }
 function RemoveBook() {
 	const cancelBtnArray = Array.from(document.querySelectorAll(".cancel"));
@@ -64,6 +65,35 @@ function removeEvent() {
 	cancelBtnArray.forEach((cancelBtn) => {
 		cancelBtn.removeEventListener("click", eventForRemove);
 	});
+}
+
+function checkReadStatus() {
+	const bookStatus = Array.from(document.querySelectorAll(".readStatus"));
+	bookStatus.forEach((bookstat) => {
+		bookstat.addEventListener("click", (e) => {
+			const readIndex = e.target.parentElement.getAttribute("data-index");
+			if (bookstat.checked === true) {
+				Library[readIndex].status = "Read";
+			} else {
+				Library[readIndex].status = "notRead";
+			}
+			// console.log(Library);
+		});
+	});
+}
+
+function addAllBooks() {
+	Library.forEach((book) => {
+		addToList(book, Library.indexOf(book), book.status === "Read");
+	});
+}
+function removeAllBooks() {
+	const book = Array.from(document.querySelectorAll(".book"));
+	book.forEach((item) => item.remove());
+}
+function refreshBookList() {
+	removeAllBooks();
+	addAllBooks();
 }
 
 addBtn.addEventListener("click", (e) => {
@@ -83,6 +113,9 @@ addBtn.addEventListener("click", (e) => {
 		const indexBook = Library.indexOf(book);
 		addToList(book, indexBook, status.checked);
 
+		// console.log(Library);
+		refreshBookList();
+
 		console.log(Library);
 		removeEvent();
 		RemoveBook();
@@ -101,18 +134,4 @@ Library.forEach((book) => {
 
 RemoveBook();
 
-function checkReadStatus() {
-	const bookStatus = Array.from(document.querySelectorAll(".readStatus"));
-	bookStatus.forEach((bookstat) => {
-		bookstat.addEventListener("click", (e) => {
-			const readIndex = e.target.parentElement.getAttribute("data-index");
-			if (bookstat.checked === true) {
-				Library[readIndex].status = "Read";
-			} else {
-				Library[readIndex].status = "notRead";
-			}
-			// console.log(Library);
-		});
-	});
-}
 checkReadStatus();
