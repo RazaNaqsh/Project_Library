@@ -97,7 +97,7 @@ function refreshBookList() {
 }
 
 addBtn.addEventListener("click", (e) => {
-	e.preventDefault();
+	// e.preventDefault();
 
 	const bookTitle = document.getElementById("bookName").value;
 	const authorName = document.getElementById("authorName").value;
