@@ -26,11 +26,19 @@ const Library = [
 	},
 ];
 
-function Book(name, author, pages, status) {
-	this.title = name;
-	this.author = author;
-	this.pages = pages;
-	this.status = status;
+// function Book(name, author, pages, status) {
+// 	this.title = name;
+// 	this.author = author;
+// 	this.pages = pages;
+// 	this.status = status;
+// }
+class Book {
+	constructor(name, author, pages, status) {
+		this.title = name;
+		this.author = author;
+		this.pages = pages;
+		this.status = status;
+	}
 }
 
 function addToList(book, index, status) {
