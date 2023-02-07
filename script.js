@@ -1,10 +1,6 @@
 const addBtn = document.getElementById("submit");
 const list = document.getElementById("bookList");
 
-// if (bookStatus.checked === false) {
-// 	console.log("not read");
-// } else console.log("read");
-
 const Library = [
 	{
 		title: "Solo Leveling",
@@ -26,12 +22,6 @@ const Library = [
 	},
 ];
 
-// function Book(name, author, pages, status) {
-// 	this.title = name;
-// 	this.author = author;
-// 	this.pages = pages;
-// 	this.status = status;
-// }
 class Book {
 	constructor(name, author, pages, status) {
 		this.title = name;
