@@ -1,10 +1,6 @@
 const addBtn = document.getElementById("submit");
 const list = document.getElementById("bookList");
 
-// if (bookStatus.checked === false) {
-// 	console.log("not read");
-// } else console.log("read");
-
 const Library = [
 	{
 		title: "Solo Leveling",
@@ -26,11 +22,23 @@ const Library = [
 	},
 ];
 
-function Book(name, author, pages, status) {
-	this.title = name;
-	this.author = author;
-	this.pages = pages;
-	this.status = status;
+class Book {
+	constructor(name, author, pages, status) {
+		this.title = name;
+		this.author = author;
+		this.pages = pages;
+		this.status = status;
+	}
+}
+
+function eventForRemove(e) {
+	const indexToRemove = e.target.getAttribute("data-index");
+	// console.log(indexToRemove);
+	const elToRemove = e.target.parentElement.parentElement;
+	// console.log(elToRemove);
+	elToRemove.remove();
+	Library.splice(indexToRemove, 1);
+	// console.log(Library);
 }
 
 function addToList(book, index, status) {
@@ -44,28 +52,23 @@ function addToList(book, index, status) {
 	<td data-index =${index}><input type="checkbox" class="readStatus" ${tick}></td>
 	<td data-index =${index}><a href="#" data-index =${index} class="cancel">X</a></td>`;
 	list.appendChild(row);
+	const cancelBtnArray = Array.from(document.querySelectorAll(".cancel"));
+	const lastCancelBtn = [...cancelBtnArray].at(-1);
+	lastCancelBtn.addEventListener("click", eventForRemove);
 }
-function eventForRemove(e) {
-	const indexToRemove = e.target.getAttribute("data-index");
-	// console.log(indexToRemove);
-	const elToRemove = e.target.parentElement.parentElement;
-	// console.log(elToRemove);
-	elToRemove.remove();
-	Library.splice(indexToRemove, 1);
-	console.log(Library);
-}
+
 function addEvent() {
 	const cancelBtnArray = Array.from(document.querySelectorAll(".cancel"));
 	cancelBtnArray.forEach((cancelBtn) => {
 		cancelBtn.addEventListener("click", eventForRemove);
 	});
 }
-function removeEvent() {
-	const cancelBtnArray = Array.from(document.querySelectorAll(".cancel"));
-	cancelBtnArray.forEach((cancelBtn) => {
-		cancelBtn.removeEventListener("click", eventForRemove);
-	});
-}
+// function removeEvent() {
+// 	const cancelBtnArray = Array.from(document.querySelectorAll(".cancel"));
+// 	cancelBtnArray.forEach((cancelBtn) => {
+// 		cancelBtn.removeEventListener("click", eventForRemove);
+// 	});
+// }
 
 function checkReadStatus() {
 	const bookStatus = Array.from(document.querySelectorAll(".readStatus"));
@@ -97,7 +100,7 @@ function refreshBookList() {
 }
 
 addBtn.addEventListener("click", (e) => {
-	// e.preventDefault();
+	e.preventDefault();
 
 	const bookTitle = document.getElementById("bookName").value;
 	const authorName = document.getElementById("authorName").value;
@@ -118,14 +121,15 @@ addBtn.addEventListener("click", (e) => {
 		refreshBookList();
 
 		console.log(Library);
-		removeEvent();
-		addEvent();
+		// removeEvent();
+		// addEvent();
 
 		checkReadStatus();
 
 		document.getElementById("bookName").value = "";
 		document.getElementById("authorName").value = "";
 		document.getElementById("bookPages").value = undefined;
+		document.getElementById("bookStatus").checked = false;
 	}
 });
 
