@@ -31,6 +31,16 @@ class Book {
 	}
 }
 
+function eventForRemove(e) {
+	const indexToRemove = e.target.getAttribute("data-index");
+	// console.log(indexToRemove);
+	const elToRemove = e.target.parentElement.parentElement;
+	// console.log(elToRemove);
+	elToRemove.remove();
+	Library.splice(indexToRemove, 1);
+	// console.log(Library);
+}
+
 function addToList(book, index, status) {
 	const row = document.createElement("tr");
 	let tick;
@@ -42,28 +52,23 @@ function addToList(book, index, status) {
 	<td data-index =${index}><input type="checkbox" class="readStatus" ${tick}></td>
 	<td data-index =${index}><a href="#" data-index =${index} class="cancel">X</a></td>`;
 	list.appendChild(row);
+	const cancelBtnArray = Array.from(document.querySelectorAll(".cancel"));
+	const lastCancelBtn = [...cancelBtnArray].at(-1);
+	lastCancelBtn.addEventListener("click", eventForRemove);
 }
-function eventForRemove(e) {
-	const indexToRemove = e.target.getAttribute("data-index");
-	// console.log(indexToRemove);
-	const elToRemove = e.target.parentElement.parentElement;
-	// console.log(elToRemove);
-	elToRemove.remove();
-	Library.splice(indexToRemove, 1);
-	console.log(Library);
-}
+
 function addEvent() {
 	const cancelBtnArray = Array.from(document.querySelectorAll(".cancel"));
 	cancelBtnArray.forEach((cancelBtn) => {
 		cancelBtn.addEventListener("click", eventForRemove);
 	});
 }
-function removeEvent() {
-	const cancelBtnArray = Array.from(document.querySelectorAll(".cancel"));
-	cancelBtnArray.forEach((cancelBtn) => {
-		cancelBtn.removeEventListener("click", eventForRemove);
-	});
-}
+// function removeEvent() {
+// 	const cancelBtnArray = Array.from(document.querySelectorAll(".cancel"));
+// 	cancelBtnArray.forEach((cancelBtn) => {
+// 		cancelBtn.removeEventListener("click", eventForRemove);
+// 	});
+// }
 
 function checkReadStatus() {
 	const bookStatus = Array.from(document.querySelectorAll(".readStatus"));
@@ -95,7 +100,7 @@ function refreshBookList() {
 }
 
 addBtn.addEventListener("click", (e) => {
-	// e.preventDefault();
+	e.preventDefault();
 
 	const bookTitle = document.getElementById("bookName").value;
 	const authorName = document.getElementById("authorName").value;
@@ -116,14 +121,15 @@ addBtn.addEventListener("click", (e) => {
 		refreshBookList();
 
 		console.log(Library);
-		removeEvent();
-		addEvent();
+		// removeEvent();
+		// addEvent();
 
 		checkReadStatus();
 
 		document.getElementById("bookName").value = "";
 		document.getElementById("authorName").value = "";
 		document.getElementById("bookPages").value = undefined;
+		document.getElementById("bookStatus").checked = false;
 	}
 });
 
